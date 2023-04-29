@@ -2,6 +2,8 @@ package com.bsxjzb;
 
 import com.bsxjzb.annotation.RpcService;
 import com.bsxjzb.constant.SysConstant;
+import com.bsxjzb.netty.NettyInitializer;
+import com.bsxjzb.netty.NettyThread;
 import com.bsxjzb.registry.ServiceRegistry;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.BeansException;
@@ -15,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RpcServer implements ApplicationContextAware {
-    private Thread nettyServer;
+    private NettyThread nettyServer;
     private String serverAddress;
     private Map<String, Object> serviceMap = new HashMap<>();
     private ServiceRegistry serviceRegistry;
@@ -43,11 +45,14 @@ public class RpcServer implements ApplicationContextAware {
 
     @PostConstruct
     public void start() {
-        //zookeeper注册服务，new nettyThread运行
+        nettyServer = new NettyThread(serverAddress, new NettyInitializer(serviceMap));
+        new Thread(nettyServer).start();
+        serviceRegistry.registry(serverAddress, serviceMap);
     }
 
     @PreDestroy
     public void stop() {
-
+        serviceRegistry.unregister();
+        nettyServer.closeServer();
     }
 }
