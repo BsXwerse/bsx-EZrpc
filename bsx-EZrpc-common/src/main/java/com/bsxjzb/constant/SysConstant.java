@@ -8,4 +8,6 @@ public class SysConstant {
     public static final String SERVICE_CONCAT_TOKEN = "#";
     public static final int BEAT_INTERVAL = 30;
     public static final int BEAT_TIME_OUT = BEAT_INTERVAL * 3;
+    public static final int AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
+    public static final String BEAT_ID = "beat!";
 }

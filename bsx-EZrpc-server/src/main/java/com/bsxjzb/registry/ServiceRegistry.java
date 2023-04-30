@@ -4,7 +4,7 @@ import com.bsxjzb.constant.SysConstant;
 import com.bsxjzb.service.RpcServerNodeInfo;
 import com.bsxjzb.service.RpcServiceInfo;
 import com.bsxjzb.util.JsonUtil;
-import com.bsxjzb.zookeeper.CuratorClient;
+import com.bsxjzb.util.CuratorClient;
 import org.apache.curator.framework.state.ConnectionState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

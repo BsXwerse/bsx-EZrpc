@@ -1,4 +1,4 @@
-package com.bsxjzb.zookeeper;
+package com.bsxjzb.util;
 
 import com.bsxjzb.constant.SysConstant;
 import org.apache.curator.framework.CuratorFramework;

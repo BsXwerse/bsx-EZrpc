@@ -1,5 +1,6 @@
 package com.bsxjzb.netty;
 
+import com.bsxjzb.constant.SysConstant;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -10,12 +11,33 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NettyThread implements Runnable {
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public final class NettyThread implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(NettyThread.class);
 
-    private ChannelInitializer<SocketChannel> channelInitializer;
+    private final ChannelInitializer<SocketChannel> channelInitializer;
     private Channel serverChannel;
-    private String serverAddress;
+    private final String serverAddress;
+    protected static ThreadPoolExecutor serviceThreadPool = new ThreadPoolExecutor(
+            SysConstant.AVAILABLE_PROCESSORS + 1,
+            SysConstant.AVAILABLE_PROCESSORS * 3,
+            60L,
+            TimeUnit.SECONDS,
+            new LinkedBlockingDeque<>(1000),
+            new ThreadFactory() {
+                private final AtomicInteger index = new AtomicInteger(0);
+                @Override
+                public Thread newThread(Runnable r) {
+                    return new Thread(r, "RpcServer-thread-" + index.incrementAndGet());
+                }
+            },
+            new ThreadPoolExecutor.AbortPolicy()
+    );
 
     public NettyThread(String serverAddress, ChannelInitializer<SocketChannel> channelInitializer) {
         this.channelInitializer = channelInitializer;
@@ -51,5 +73,6 @@ public class NettyThread implements Runnable {
         if (serverChannel != null) {
             serverChannel.close();
         }
+        serviceThreadPool.shutdownNow();
     }
 }

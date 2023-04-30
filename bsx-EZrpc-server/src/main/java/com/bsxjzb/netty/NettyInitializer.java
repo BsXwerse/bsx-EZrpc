@@ -1,6 +1,10 @@
 package com.bsxjzb.netty;
 
+import com.bsxjzb.codec.RpcDecoder;
+import com.bsxjzb.codec.RpcEncoder;
 import com.bsxjzb.constant.SysConstant;
+import com.bsxjzb.protocol.RpcRequest;
+import com.bsxjzb.protocol.RpcResponse;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -24,6 +28,8 @@ public class NettyInitializer extends ChannelInitializer<SocketChannel> {
                 SysConstant.BEAT_TIME_OUT, TimeUnit.SECONDS));
         pipeline.addLast(new LengthFieldBasedFrameDecoder(65536, 0,
                 4, 0, 0));
-
+        pipeline.addLast(new RpcDecoder(RpcRequest.class));
+        pipeline.addLast(new RpcEncoder(RpcResponse.class));
+        pipeline.addLast(new RpcRequestHandler(serviceMap));
     }
 }
