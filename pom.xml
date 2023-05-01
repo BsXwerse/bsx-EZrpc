@@ -11,6 +11,7 @@
     <modules>
         <module>bsx-EZrpc-common</module>
         <module>bsx-EZrpc-server</module>
+        <module>bsx-EZrpc-client</module>
     </modules>
 
     <properties>

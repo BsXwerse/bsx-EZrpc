@@ -9,6 +9,8 @@ import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class CuratorClient {
     private static final Logger logger = LoggerFactory.getLogger(CuratorClient.class);
 
@@ -50,6 +52,14 @@ public class CuratorClient {
 
     public void addConnectionStateListener(ConnectionStateListener connectionStateListener) {
         client.getConnectionStateListenable().addListener(connectionStateListener);
+    }
+
+    public List<String> getChildren(String path) throws Exception {
+        return client.getChildren().forPath(path);
+    }
+
+    public byte[] getData(String path) throws Exception {
+        return client.getData().forPath(path);
     }
 
     public void close() {
