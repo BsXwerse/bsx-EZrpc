@@ -3,6 +3,8 @@ package com.bsxjzb.util;
 import com.bsxjzb.constant.SysConstant;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache;
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
@@ -60,6 +62,12 @@ public class CuratorClient {
 
     public byte[] getData(String path) throws Exception {
         return client.getData().forPath(path);
+    }
+
+    public void watchPathChildrenNode(String path, PathChildrenCacheListener listener) throws Exception {
+        PathChildrenCache cache = new PathChildrenCache(client, path, true);
+        cache.start(PathChildrenCache.StartMode.NORMAL);
+        cache.getListenable().addListener(listener);
     }
 
     public void close() {

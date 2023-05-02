@@ -11,4 +11,5 @@ public class SysConstant {
     public static final int BEAT_TIME_OUT = BEAT_INTERVAL * 3;
     public static final int AVAILABLE_PROCESSORS = Runtime.getRuntime().availableProcessors();
     public static final String BEAT_ID = "beat!";
+    public static final long WAITING_TIME = 5;
 }

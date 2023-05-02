@@ -23,7 +23,7 @@ public final class NettyThread implements Runnable {
     private final ChannelInitializer<SocketChannel> channelInitializer;
     private Channel serverChannel;
     private final String serverAddress;
-    protected static ThreadPoolExecutor serviceThreadPool = new ThreadPoolExecutor(
+    static ThreadPoolExecutor serviceThreadPool = new ThreadPoolExecutor(
             SysConstant.AVAILABLE_PROCESSORS + 1,
             SysConstant.AVAILABLE_PROCESSORS * 3,
             60L,

@@ -2,10 +2,9 @@ package com.bsxjzb.util;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class JsonUtil {
@@ -28,5 +27,16 @@ public class JsonUtil {
             throw new IllegalStateException(e.getMessage(), e);
         }
         return json;
+    }
+
+    public static <T> T jsonToObject(String json, Class<?> clazz) {
+        T res = null;
+        JavaType javaType = objectMapper.getTypeFactory().constructType(clazz);
+        try {
+            res = objectMapper.readValue(json, javaType);
+        } catch (IOException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+        return res;
     }
 }
