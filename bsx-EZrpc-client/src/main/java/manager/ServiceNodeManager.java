@@ -18,10 +18,10 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class ServiceNodeManager {
     private static final Logger logger = LoggerFactory.getLogger(ServiceNodeManager.class);
 
-    private CuratorClient curatorClient;
-    private ServerChannelManager serverChannelManager = new ServerChannelManager();
-    private ServerNodeRouter serverNodeRouter = new ServerNodeRouter();
-    private CopyOnWriteArraySet<RpcServerNodeInfo> nodeSet = new CopyOnWriteArraySet<>();
+    private final CuratorClient curatorClient;
+    private final ServerChannelManager serverChannelManager = new ServerChannelManager();
+    private final ServerNodeRouter serverNodeRouter = new ServerNodeRouter();
+    private final CopyOnWriteArraySet<RpcServerNodeInfo> nodeSet = new CopyOnWriteArraySet<>();
 
     public ServiceNodeManager(String registryAddress) {
         curatorClient = new CuratorClient(registryAddress);

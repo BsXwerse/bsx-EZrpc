@@ -1,7 +1,7 @@
 package manager;
 
 import com.bsxjzb.service.RpcServerNodeInfo;
-import handler.RpcClientInitializer;
+import handler.NettyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
@@ -39,7 +39,7 @@ public class ServerChannelManager {
             Bootstrap bootstrap = new Bootstrap();
             bootstrap.group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
-                    .handler(new RpcClientInitializer())
+                    .handler(new NettyClientInitializer())
                     .option(ChannelOption.SO_KEEPALIVE, true);
             try {
                 channel = bootstrap.connect(node.getHost(), node.getPort()).sync().channel();

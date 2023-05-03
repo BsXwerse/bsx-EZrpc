@@ -2,6 +2,9 @@ package proxy;
 
 import com.bsxjzb.constant.SysConstant;
 import com.bsxjzb.protocol.RpcRequest;
+import handler.RpcClientHandler;
+import handler.RpcFuture;
+import io.netty.channel.Channel;
 import manager.ServiceNodeManager;
 
 import java.lang.reflect.InvocationHandler;
@@ -44,7 +47,8 @@ public class ServiceProxy implements InvocationHandler {
 
         String serviceKey = method.getDeclaringClass().getName().concat(SysConstant.SERVICE_CONCAT_TOKEN)
                 .concat(version);
-
-        return null;
+        Channel connection = serviceNodeManager.getConnection(serviceKey);
+        RpcFuture rpcFuture = connection.pipeline().get(RpcClientHandler.class).sendRequest(rpcRequest);
+        return rpcFuture.get();
     }
 }
