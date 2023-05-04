@@ -1,7 +1,22 @@
 # bsx-EZrpc
 
 基于spring，zookeeper，netty的轻量级rpc框架
+
 ## 使用
+
+克隆本项目
+
+执行`mvn install`安装进本地仓库
+
+导入依赖
+```xml
+<dependency>
+    <groupId>com.bsxjzb</groupId>
+    <artifactId>bsx-EZrpc-client</artifactId>
+<!--服务端为<artifactId>bsx-EZrpc-server</artifactId>-->
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
 
 ### 服务端
 
