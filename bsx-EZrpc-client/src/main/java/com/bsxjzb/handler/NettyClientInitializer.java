@@ -1,4 +1,4 @@
-package handler;
+package com.bsxjzb.handler;
 
 import com.bsxjzb.codec.RpcDecoder;
 import com.bsxjzb.codec.RpcEncoder;

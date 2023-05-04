@@ -1,4 +1,4 @@
-package manager;
+package com.bsxjzb.manager;
 
 import com.bsxjzb.constant.SysConstant;
 import com.bsxjzb.service.RpcServerNodeInfo;
@@ -9,7 +9,7 @@ import org.apache.curator.framework.recipes.cache.ChildData;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import route.ServerNodeRouter;
+import com.bsxjzb.route.ServerNodeRouter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ServiceNodeManager {
                         String add = new String(data.getData());
                         if (nodeSet.add(JsonUtil.jsonToObject(add, RpcServerNodeInfo.class))) {
                             serverNodeRouter.update(nodeSet);
-                            logger.info("add service node : {}", add);
+                            logger.info("add service node : \n{}", add);
                         }
                         break;
                     case CHILD_REMOVED:
@@ -51,7 +51,7 @@ public class ServiceNodeManager {
                         if (nodeSet.remove(JsonUtil.jsonToObject(remove, RpcServerNodeInfo.class))) {
                             serverNodeRouter.update(nodeSet);
                             serverChannelManager.update(nodeSet);
-                            logger.info("remove service node : {}", remove);
+                            logger.info("remove service node : \n{}", remove);
                         }
                         break;
                     default:

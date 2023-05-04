@@ -1,7 +1,7 @@
-package manager;
+package com.bsxjzb.manager;
 
 import com.bsxjzb.service.RpcServerNodeInfo;
-import handler.NettyClientInitializer;
+import com.bsxjzb.handler.NettyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;

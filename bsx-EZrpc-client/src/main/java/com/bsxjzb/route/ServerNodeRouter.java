@@ -1,4 +1,4 @@
-package route;
+package com.bsxjzb.route;
 
 import com.bsxjzb.constant.SysConstant;
 import com.bsxjzb.service.RpcServerNodeInfo;

@@ -1,4 +1,4 @@
-package handler;
+package com.bsxjzb.handler;
 
 import com.bsxjzb.protocol.RpcRequest;
 import com.bsxjzb.protocol.RpcResponse;

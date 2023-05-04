@@ -58,7 +58,7 @@ public final class NettyThread implements Runnable {
             String[] split = serverAddress.split(":");
             int port = Integer.parseInt(split[1]);
             serverChannel = serverBootstrap.bind(split[0], port).sync().channel();
-            logger.info("server runs on : {}", port);
+            logger.info("server runs on : {}:{}",split[0], port);
             serverChannel.closeFuture().sync();
         } catch (Exception e) {
             logger.error("server stops with error");

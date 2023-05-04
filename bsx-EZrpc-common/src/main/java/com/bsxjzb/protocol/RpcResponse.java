@@ -10,7 +10,7 @@ public class RpcResponse implements Serializable {
     private Object result;
 
     public boolean isError() {
-        return error == null;
+        return error != null;
     }
 
     public String getError() {

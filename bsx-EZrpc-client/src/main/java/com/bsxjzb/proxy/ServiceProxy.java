@@ -1,11 +1,11 @@
-package proxy;
+package com.bsxjzb.proxy;
 
 import com.bsxjzb.constant.SysConstant;
 import com.bsxjzb.protocol.RpcRequest;
-import handler.RpcClientHandler;
-import handler.RpcFuture;
+import com.bsxjzb.handler.RpcClientHandler;
+import com.bsxjzb.handler.RpcFuture;
 import io.netty.channel.Channel;
-import manager.ServiceNodeManager;
+import com.bsxjzb.manager.ServiceNodeManager;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
