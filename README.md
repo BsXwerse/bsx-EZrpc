@@ -36,11 +36,11 @@ public class AHello implements Hello {
 }
 
 @Component
-@RpcService(value = Hello.class, version = "A")
-public class AHello implements Hello {
+@RpcService(value = Hello.class, version = "B")
+public class BHello implements Hello {
     @Override
     public String talk(String msg) {
-        return "A got the msg:" + msg + ", and A said hi!";
+        return "B got the msg:" + msg + ", and B said hi!";
     }
 }
 ```
